@@ -68,7 +68,7 @@ It is only a **sample of about 1,000 of the most common passwords**, so you can 
 
 ### Using the full list
 
-For a more complete check, download `rockyou.txt` from a recognized source:
+For a more complete check, download `rockyou.txt` from a recognized source: 
 
 - **Kali Linux**: the wordlist ships with the system at `/usr/share/wordlists/rockyou.txt.gz`
   ```bash
