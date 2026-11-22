@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Security Analyzer V4.2</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app-shell">
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand-shield" aria-hidden="true">
+                <svg viewBox="0 0 72 82" role="img">
+                    <path d="M36 2 66 13v25c0 20-12 34-30 42C18 72 6 58 6 38V13L36 2Z" fill="none" stroke="#54e7ff" stroke-width="2"/>
+                    <path d="M36 6 62 16v21c0 17-10 29-26 37C20 66 10 54 10 37V16L36 6Z" fill="#0d2a38" opacity=".85"/>
+                    <rect x="25" y="34" width="22" height="19" rx="3" fill="#4cdfff" opacity=".92"/>
+                    <path d="M29 34v-7a7 7 0 0 1 14 0v7" fill="none" stroke="#b8f5ff" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="36" cy="43" r="2.4" fill="#13313e"/>
+                    <path d="M36 45v4" stroke="#13313e" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div>
+                <h1>Password Security Analyzer</h1>
+                <p>Analyze&nbsp; • &nbsp;Check&nbsp; • &nbsp;Protect</p>
+            </div>
+        </div>
+        <div class="top-status"><span></span> V4.2 • LOCAL ANALYZER</div>
+    </header>
+
+    <section class="dashboard">
+        <div class="dashboard-row top-row">
+            <section class="card analyzer-card">
+                <h2><span class="section-icon lock-icon">⌑</span> Password Analyzer</h2>
+                <div class="password-row">
+                    <input id="password" type="password" autocomplete="off" spellcheck="false" placeholder="Enter a password">
+                    <button id="toggle-password" class="icon-button" type="button" title="Show password">◉</button>
+                </div>
+                <div class="button-row">
+                    <button id="copy-password" type="button" disabled><span class="btn-icon">▣</span> Copy</button>
+                    <button id="check-rockyou" type="button" disabled><span class="btn-icon">⌕</span> Check RockYou</button>
+                    <button id="check-hibp" type="button" disabled><span class="btn-icon">◎</span> Check Breach DB</button>
+                </div>
+                <p id="copy-status" class="status"></p>
+            </section>
+
+            <section class="card score-card">
+                <h2>Strength Score</h2>
+                <div class="score-layout">
+                    <div id="score-ring" class="score-ring" aria-hidden="true">
+                        <div class="ring-inner">
+                            <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 5.5c-5.8 0-10.5 4.7-10.5 10.5 0 2.5.7 4.9 2.1 6.9" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"/><path d="M16 8.4c-4.2 0-7.6 3.4-7.6 7.6 0 3.4 1.3 5.7 2.8 7.6" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"/><path d="M16 11.2c-2.6 0-4.8 2.1-4.8 4.8 0 3.9 1.6 6.7 3.2 8.4" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"/><path d="M16 5.5c5.8 0 10.5 4.7 10.5 10.5 0 4.1-1.8 7.8-4.7 10.3" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"/><path d="M16 8.4c4.2 0 7.6 3.4 7.6 7.6 0 4.7-2.2 7.7-4.1 9.3" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"/><path d="M16 14c-1.1 0-2 .9-2 2 0 5.2 1.9 7.9 3.1 9.5" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"/></svg>
+                        </div>
+                    </div>
+                    <div class="score-value">
+                        <strong id="score">0%</strong>
+                        <span id="strength">Not analyzed</span>
+                    </div>
+                </div>
+                <div class="legend"><span class="red-dot"></span>0-40% Weak <span class="orange-dot"></span>40-70% Medium <span class="green-dot"></span>70-100% Strong</div>
+                <div class="hidden-functional-progress"><div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div></div>
+            </section>
+
+            <section class="card requirements-card">
+                <h2>Requirements</h2>
+                <div class="requirements">
+                    <div id="length-requirement" class="requirement invalid"><span class="requirement-icon">✕</span><span>Length ≥ 8</span><span class="req-right">✕</span></div>
+                    <div id="uppercase-requirement" class="requirement invalid"><span class="requirement-icon">✕</span><span>Uppercase letter</span><span class="req-right">✕</span></div>
+                    <div id="lowercase-requirement" class="requirement invalid"><span class="requirement-icon">✕</span><span>Lowercase letter</span><span class="req-right">✕</span></div>
+                    <div id="number-requirement" class="requirement invalid"><span class="requirement-icon">✕</span><span>Number</span><span class="req-right">✕</span></div>
+                    <div id="special-requirement" class="requirement invalid"><span class="requirement-icon">✕</span><span>Special character</span><span class="req-right">✕</span></div>
+                </div>
+            </section>
+
+            <section class="card patterns-card">
+                <h2><span class="section-icon crosshair-icon">◎</span> Weak Pattern Detection</h2>
+                <div id="repeated-character-pattern" class="pattern-item pattern-safe">
+                    <span class="pattern-icon">✓</span><div><strong>Repeated characters</strong><p id="repeated-character-message">No repeated characters detected.</p></div>
+                </div>
+                <div id="sequential-pattern" class="pattern-item pattern-safe">
+                    <span class="pattern-icon">✓</span><div><strong>Sequential pattern</strong><p id="sequential-message">No sequential pattern detected.</p></div>
+                </div>
+                <div id="repeated-pattern" class="pattern-item pattern-safe">
+                    <span class="pattern-icon">✓</span><div><strong>Repeated pattern</strong><p id="repeated-pattern-message">No repeated pattern detected.</p></div>
+                </div>
+            </section>
+        </div>
+
+        <div class="dashboard-row middle-row">
+            <section class="card exposure-card">
+                <h2><span class="section-icon">◇</span> Exposure Checks</h2>
+                <div class="exposure-results">
+                    <div class="exposure-item"><span class="big-check">✓</span><div><strong>RockYou Wordlist</strong><span id="wordlist-status" class="result-value">Not checked</span></div></div>
+                    <div class="vertical-separator"></div>
+                    <div class="exposure-item"><span class="big-check">✓</span><div><strong>Have I Been Pwned</strong><span id="hibp-status" class="result-value">Not checked</span></div></div>
+                </div>
+                <p class="privacy-note">Your password stays private. Only the first 5 characters of its SHA-1 hash<br>are sent to the breach database (k-Anonymity model).</p>
+            </section>
+
+        
+
+            <section class="card crack-card">
+                <h2><span class="section-icon">◷</span> Crack Time Estimation</h2>
+                <div class="crack-meta">
+                    <div><span>MODEL</span><strong>Project theoretical hashing/cracking model</strong></div>
+                    <div><span>SPEED</span><strong id="gpu-rate">255,000 guesses/second&nbsp; <span class="info-dot">i</span></strong></div>
+                </div>
+                <div class="time-grid">
+                    <div class="time-box average"><span>AVERAGE CASE</span><strong id="time-average">—</strong><small>Time to crack (average)</small><i></i></div>
+                    <div class="time-box worst"><span>WORST CASE</span><strong id="time-worst">—</strong><small>Time to crack (worst case)</small><i></i></div>
+                </div>
+                <p class="foot-note">Estimates are theoretical and depend on the hashing protocol, hardware and attack strategy used.</p>
+            </section>
+
+             <section class="card generator-card">
+                <div class="generator-heading"><div class="generator-emblem" aria-hidden="true"><svg viewBox="0 0 72 72"><path d="M36 4 62 13v21c0 14-8 25-26 34C18 59 10 48 10 34V13L36 4Z" fill="#163443" stroke="#75b7cf" stroke-width="1.5"/><path d="m21 44 30-20M19 50l34-23" stroke="#9ad7eb" stroke-width="2.4" stroke-linecap="round"/><circle cx="35" cy="29" r="6" fill="#1c5468" stroke="#9ad7eb"/><path d="M38 17l4-4M45 22l5-1M48 30l6 1M25 36l-5 3" stroke="#b6eaf8" stroke-width="2" stroke-linecap="round"/></svg></div><h2>Password Generation</h2></div>
+                <div class="generator-top">
+                    <button id="generate-password" class="generate-button" type="button"><span class="wand-icon">✣</span> Generate</button>
+                    <div class="length-control"><span>LENGTH</span><input id="generator-length" type="range" min="4" max="64" value="20"><div class="range-labels"><span>6</span><span>12</span><span>16</span><span>20</span><span>28</span></div></div>
+                    <input id="generator-length-number" class="length-number" type="number" min="4" max="64" value="20" aria-label="Password length">
+                    <div class="toggle-box">
+                        <label><input id="gen-uppercase" type="checkbox" checked><span></span>Uppercase</label><label><input id="gen-numbers" type="checkbox" checked><span></span>Numbers</label>
+                        <label><input id="gen-lowercase" type="checkbox" checked><span></span>Lowercase</label><label><input id="gen-special" type="checkbox" checked><span></span>Special</label>
+                    </div>
+                </div>
+                <span id="generator-length-value" class="visually-hidden">20</span><p id="generator-status" class="status"></p>
+                <div class="generated-block"><span class="generated-label">GENERATED PASSWORD</span><div class="generated-password-row"><input id="generated-password" type="text" readonly autocomplete="off" spellcheck="false" placeholder="Your generated password will appear here"><button id="copy-generated-password" type="button" disabled><span class="btn-icon">▣</span> Copy</button><button id="use-generated-password" type="button" disabled><span class="btn-icon">⇩</span> Use in Analyzer</button></div><p id="generated-copy-status" class="status"></p></div>
+            </section>
+        </div>
+
+        <div class="dashboard-row bottom-row">
+           
+
+            
+        </div>
+    </section>
+
+    <footer class="app-footer"><span>♧ &nbsp;This tool works entirely on your device. Your data never leaves your device except for the k-anonymity breach check.</span><span>Built for security learning and responsible usage.</span></footer>
+
+    <div class="functional-hidden"><div class="protocol-note"></div><div class="nist-note"></div><div class="nist-source"></div><div class="privacy-list"></div></div>
+</main>
+<script src="./script.js"></script>
+</body>
+</html>
