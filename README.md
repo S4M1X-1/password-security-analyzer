@@ -1,4 +1,4 @@
-# 🔐 Password Security Analyzer
+#  Password Security Analyzer
 
 Password Security Analyzer is a lightweight, browser-based tool that evaluates how strong a password really is. It scores the password against length and character-variety rules, flags weak patterns such as repeated characters, keyboard or numeric sequences and repeated chunks, checks whether the password appears in the **RockYou** wordlist or in the **Have I Been Pwned** breach corpus, estimates theoretical crack times, and generates strong random passwords with the Web Crypto API. Everything runs locally in the browser. The only network request is the Have I Been Pwned check, and it follows the k-Anonymity model, so the password itself never leaves your device.
 
@@ -6,7 +6,7 @@ Password Security Analyzer is a lightweight, browser-based tool that evaluates h
 
 ---
 
-## ✨ Features
+##  Features
 
 - **Strength score** (0–100%) based on length and character variety, displayed as a color-coded ring.
 - **Requirement checklist**: length ≥ 8, uppercase, lowercase, number, special character.
@@ -21,7 +21,7 @@ Password Security Analyzer is a lightweight, browser-based tool that evaluates h
 
 ---
 
-## 📁 Project structure
+##  Project structure
 
 ```
 password-security-analyzer/
@@ -35,7 +35,7 @@ password-security-analyzer/
 
 ---
 
-## 🚀 Getting started
+##  Getting started
 
 1. Clone the repository:
 
@@ -56,9 +56,9 @@ password-security-analyzer/
 
 ---
 
-## 📚 About `rockyou.txt`
+##  About `rockyou.txt`
 
-⚠️ **The `Wordlists/rockyou.txt` file in this repository is NOT the full list.**
+ **The `Wordlists/rockyou.txt` file in this repository is NOT the full list.**
 It is only a **sample of about 1,000 of the most common passwords**, so you can try the tool right away.
 
 ### Why the full list is not included
@@ -78,11 +78,11 @@ For a more complete check, download `rockyou.txt` from a recognized source:
 
 Then replace `Wordlists/rockyou.txt` with the full version, keeping the same name and location.
 
-> 💡 With the full list, the initial load can take a few seconds depending on your machine and browser.
+>  With the full list, the initial load can take a few seconds depending on your machine and browser.
 
 ---
 
-## 🔒 Privacy
+##  Privacy
 
 - All analysis happens **locally in your browser**.
 - No data is stored or sent anywhere, **except** during the Have I Been Pwned check, where only a 5-character prefix of the SHA-1 hash is transmitted ([learn more about k-Anonymity](https://haveibeenpwned.com/API/v3#PwnedPasswords)).
@@ -99,7 +99,7 @@ Then replace `Wordlists/rockyou.txt` with the full version, keeping the same nam
 
 ---
 
-## ⚠️ Disclaimer
+##  Disclaimer
 
 This tool is intended for **learning and responsible use**.
 Crack time estimates are **theoretical** and depend on the hashing algorithm, hardware and attack strategy used.
@@ -107,6 +107,6 @@ Do not use the RockYou wordlist for malicious purposes.
 
 ---
 
-## 📄 License
+##  License
 
 This project is released under the MIT License. You are free to use, modify and share it.
